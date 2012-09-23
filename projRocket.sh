@@ -51,7 +51,34 @@ start_wp_project (){
 	rm -rf "$DIR/$PROJ_NAME/$PROJ_NAME-theme/.git"
 
 	# now we need to ln -s the theme into wordpress content, cause we dont want to check in the wordpress install into github.
-	ln -s `readlink -e $DIR/$PROJ_NAME/$PROJ_NAME-theme` "$DIR/$PROJ_NAME/wordpress/wp-content/themes/$PROJ_NAME-theme"	
+	ln -s `readlink -e $DIR/$PROJ_NAME/$PROJ_NAME-theme` "$DIR/$PROJ_NAME/wordpress/wp-content/themes/$PROJ_NAME-theme"
+	
+	echo "Do you want to configure a database? I'm assuming one already exists in mysql...(y/n)"
+	read DB_Y_N
+	
+	if [ $DB_Y_N == "y" ];
+	then
+		echo "Enter DB Name:"
+		read DB_NAME
+
+		echo "Enter DB User:"
+		read DB_USER
+
+		echo "Enter DB Password"
+		read DB_PASS
+
+		echo "You entered Db name: $DB_NAME, Db user: $DB_USER, Pass: $DB_PASS"
+
+		# we are gonna use SED to edit config.sample that exists in wordpress/wp-config-sample.php
+		cp $DIR/$PROJ_NAME/wordpress/wp-config-sample.php $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i 's/username_here/'${DB_USER}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i 's/database_name_here/'${DB_NAME}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i 's/password_here/'${DB_PASS}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+	fi
+
+
+	echo "ALL DONE!"
+
 }
 
 
