@@ -1,4 +1,10 @@
-#projRocket: A command line project bootstrapper.
+#projRocket: A command line project bootstrapper
+
+##Installation
+```git clone``` or download a zip
+
+Stick it in your ```~/bin``` directory or make a .bashrc ```alias```
+
 
 ##Usage:
 ```
@@ -31,3 +37,7 @@ What happens:
 Creates a new theme folder based on the html5boilerplate theme 
 and grabs Wordpress from github. Your theme is ```ln -s``` into the wordpress theme directory 
 You will also be asked if you want to configure your DB which will set up wp-config.php.
+
+
+##Disclaimer
+I work on an Ubuntu machine. Therefore, I've only tested this on an Ubuntu machine. I'm not sure what OSX does with things like ```readlink``` or ```awk``` or ```sed``` so... if you happen to try it, let me know what happens!
