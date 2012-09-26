@@ -10,7 +10,7 @@ PROJ_TYPE=""
 PROJ_NAME="UNTITLED"
 
 
-if [ $1 == "--help" ];
+if [ "$1" == "--help" ];
 then
 	clear
 
@@ -191,9 +191,9 @@ start_pymodule (){
 #--------------------------- Options are parsed, do the buisness
 
 # check if project type is specified
-if [ $PROJ_TYPE == '' ];
+if [ "$PROJ_TYPE" == '' ];
 	then
-	echo "Project Type is required, use -t <project_name>...Exiting now..."
+	echo "Project Type is required, use -t <project_name>...Exiting"
 	exit
 fi	
 
@@ -206,25 +206,25 @@ if [ ! -d $DIR ];
 fi
 
 
-if [ $PROJ_TYPE == wordpress ];
+if [ "$PROJ_TYPE" == "wordpress" ];
 	then
 	start_wp_project
 	
 fi
 
-if [ $PROJ_TYPE == static ];
+if [ "$PROJ_TYPE" == "static" ];
 	then
 	start_static
 	
 fi
 
-if [ $PROJ_TYPE == staticsite ];
+if [ "$PROJ_TYPE" == "staticsite" ];
 	then
 	start_static_site
 	
 fi
 
-if [ $PROJ_TYPE == pymodule ];
+if [ "$PROJ_TYPE" == "pymodule" ];
 	then
 	start_pymodule
 	
