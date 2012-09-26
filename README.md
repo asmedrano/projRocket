@@ -2,7 +2,9 @@
 
 ##usage:
 ```
-./projRocket -t <project_type> See: Project Types -n <project_name> Default: UNTITLED -d <project_directory>Default: CWD
+./projRocket --help
+
+./projRocket -t <project_type> -n <project_name> Default: UNTITLED -d <project_directory> Default: CWD
 ```
 
 ##Supported Project Types
