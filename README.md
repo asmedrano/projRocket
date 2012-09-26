@@ -1,6 +1,6 @@
 #projRocket: A command line project bootstrapper.
 
-##usage:
+##Usage:
 ```
 ./projRocket --help
 
