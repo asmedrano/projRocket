@@ -29,5 +29,5 @@ http://guide.python-distribute.org/creation.html
 Use: ```-t wordpress```
 What happens:
 Creates a new theme folder based on the html5boilerplate theme 
-and grabs Wordpress from github. Your theme is ln -s'd into the wordpress theme directory 
+and grabs Wordpress from github. Your theme is ```ln -s``` into the wordpress theme directory 
 You will also be asked if you want to configure your DB which will set up wp-config.php.
