@@ -35,6 +35,14 @@ then
 	echo " What happens:"
 	echo -e " Creates a static site based on html5Boilerplate"
 	
+	echo
+
+	#--------Python Module-------------------------------
+	echo -e " ----------\n Python Module\n ----------"
+	echo " Use: -t pymodule"
+	echo " What happens:"
+	echo -e " Creates a skeleton python module that adheres to \n http://guide.python-distribute.org/creation.html"
+	
 	echo 
 
 	#--------WORDPRESS-------------------------------
@@ -161,6 +169,24 @@ start_wp_project (){
 
 }
 
+start_pymodule (){
+	echo "Starting Python Module, codename: $PROJ_NAME"
+	
+	if [ ! -d "$DIR/$PROJ_NAME" ];
+		then
+			mkdir "$DIR/$PROJ_NAME"
+	fi
+	
+	cp -r $SCRIPTPATH/templates/python/pymodule/* $DIR/$PROJ_NAME/.
+
+	MODULE_NAME=` echo $PROJ_NAME | awk '{print tolower($0)}'`
+	
+	# rename module template
+	mv $DIR/$PROJ_NAME/your_module $DIR/$PROJ_NAME/$MODULE_NAME
+
+
+}
+
 
 #--------------------------- Options are parsed, do the buisness
 
@@ -197,3 +223,10 @@ if [ $PROJ_TYPE == staticsite ];
 	start_static_site
 	
 fi
+
+if [ $PROJ_TYPE == pymodule ];
+	then
+	start_pymodule
+	
+fi
+
