@@ -1,37 +1,33 @@
-projRocket: A command line project bootstrapper.
+#projRocket: A command line project bootstrapper.
 
-Usage: ./projRocket -t <project_type> See: Project Types -n <project_name> Default: UNTITLED -d <project_directory>Default: CWD
+##Usage:
+```
+./projRocket --help
 
-Supported Project Types
+./projRocket -t <project_type> -n <project_name> Default: UNTITLED -d <project_directory> Default: CWD
+```
 
- ----------
- Static
- ----------
- Use: -t static
- What happens:
- Creates index.html with some basic markup.
+##Supported Project Types
 
- ----------
- Static Site
- ----------
- Use: -t staticsite
- What happens:
- Creates a static site based on html5Boilerplate
+###Static
+Use: ```-t static```
+What happens:
+Creates index.html with some basic markup.
 
- ----------
- Python Module
- ----------
- Use: -t pymodule
- What happens:
- Creates a skeleton python module that adheres to 
- http://guide.python-distribute.org/creation.html
+###Static Site
+Use: ```-t staticsite```
+What happens:
+Creates a static site based on html5Boilerplate
 
- ----------
- Wordpress
- ----------
- Use: -t wordpress
- What happens:
- Creates a new theme folder based on the html5boilerplate theme 
- and grabs Wordpress from github. Your theme is ln -s'd into the wordpress theme directory 
- You will also be asked if you want to configure your DB which will set up wp-config.php.
+###Python Module 
+Use: ```-t pymodule```
+What happens:
+Creates a skeleton python module that adheres to 
+http://guide.python-distribute.org/creation.html
 
+###Wordpress
+Use: ```-t wordpress```
+What happens:
+Creates a new theme folder based on the html5boilerplate theme 
+and grabs Wordpress from github. Your theme is ```ln -s``` into the wordpress theme directory 
+You will also be asked if you want to configure your DB which will set up wp-config.php.
