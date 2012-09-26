@@ -1,8 +1,55 @@
 #!/bin/bash
 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=`readlink -f $0`
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=`dirname $SCRIPT`
+
 DIR="." # the directory that holds this project
 PROJ_TYPE=""
 PROJ_NAME="UNTITLED"
+
+
+if [ $1 == "--help" ];
+then
+	clear
+
+	echo
+	echo "projRocket: A command line project bootstrapper."
+	echo 
+	echo "Usage: ./projRocket -t <project_type> See: Project Types -n <project_name> Default: UNTITLED -d <project_directory>Default: CWD"
+	echo 
+	echo -e "Supported Project Types\n"
+	
+	#--------STATICPLAIN-------------------------------
+	echo -e " ----------\n Static\n ----------"
+	echo " Use: -t static"
+	echo " What happens:"
+	echo -e " Creates index.html with some basic markup."
+	
+	echo 
+	
+	#--------STATIC SITE-------------------------------
+	echo -e " ----------\n Static Site\n ----------"
+	echo " Use: -t staticsite"
+	echo " What happens:"
+	echo -e " Creates a static site based on html5Boilerplate"
+	
+	echo 
+
+	#--------WORDPRESS-------------------------------
+	echo -e " ----------\n Wordpress\n ----------"
+	echo " Use: -t wordpress"
+	echo " What happens:"
+	echo -e " Creates a new theme folder based on the html5boilerplate theme \n and grabs Wordpress from github. Your theme is ln -s'd into the wordpress theme directory \n You will also be asked if you want to configure your DB which will set up wp-config.php."
+	
+
+
+	echo
+	exit 1
+fi
+
+
 
 while getopts ":t:n:d:" opt; do
   case $opt in
@@ -27,6 +74,39 @@ while getopts ":t:n:d:" opt; do
       ;;
   esac
 done
+
+
+start_static (){
+	echo "Starting Static Html project, codename: $PROJ_NAME"
+	
+	if [ ! -d "$DIR/$PROJ_NAME" ];
+		then
+			mkdir "$DIR/$PROJ_NAME"
+	fi
+	
+	# we are just gonna a file from the templates directory
+	cp $SCRIPTPATH/templates/html/index.html $DIR/$PROJ_NAME/.
+
+}
+
+
+start_static_site (){
+	echo "Starting Static Site project, codename: $PROJ_NAME"
+
+	if [ ! -d "$DIR/$PROJ_NAME" ];
+		then
+			mkdir "$DIR/$PROJ_NAME"
+	fi
+
+	git clone git://github.com/h5bp/html5-boilerplate.git $DIR/$PROJ_NAME
+	# ungit html5bp
+	rm -rf "$DIR/$PROJ_NAME/.git"
+
+	# get rid of some files from html5 boilerplate
+	rm "$DIR/$PROJ_NAME/CHANGELOG.md"
+	rm "$DIR/$PROJ_NAME/CONTRIBUTING.md"
+	rm -rf "$DIR/$PROJ_NAME/doc"
+}
 
 
 start_wp_project (){
@@ -85,7 +165,7 @@ start_wp_project (){
 #--------------------------- Options are parsed, do the buisness
 
 # check if project type is specified
-if [ $PROJ_TYPE == "" ];
+if [ $PROJ_TYPE == '' ];
 	then
 	echo "Project Type is required, use -t <project_name>...Exiting now..."
 	exit
@@ -100,10 +180,20 @@ if [ ! -d $DIR ];
 fi
 
 
-if [ $PROJ_TYPE == 'wordpress' ];
+if [ $PROJ_TYPE == wordpress ];
 	then
 	start_wp_project
 	
 fi
 
+if [ $PROJ_TYPE == static ];
+	then
+	start_static
+	
+fi
 
+if [ $PROJ_TYPE == staticsite ];
+	then
+	start_static_site
+	
+fi
