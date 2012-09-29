@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Absolute path to this script, e.g. /home/user/bin/foo.sh
-SCRIPT=`readlink -f $0`
-# Absolute path this script is in, thus /home/user/bin
-SCRIPTPATH=`dirname $SCRIPT`
-
+SCRIPTPATH=`perl -e 'use Cwd "abs_path";print abs_path(shift)'`
 DIR="." # the directory that holds this project
 PROJ_TYPE=""
 PROJ_NAME="UNTITLED"
@@ -139,7 +135,7 @@ start_wp_project (){
 	rm -rf "$DIR/$PROJ_NAME/$PROJ_NAME-theme/.git"
 
 	# now we need to ln -s the theme into wordpress content, cause we dont want to check in the wordpress install into github.
-	ln -s `readlink -e $DIR/$PROJ_NAME/$PROJ_NAME-theme` "$DIR/$PROJ_NAME/wordpress/wp-content/themes/$PROJ_NAME-theme"
+	ln -s "$DIR/$PROJ_NAME/$PROJ_NAME-theme" "$DIR/$PROJ_NAME/wordpress/wp-content/themes/$PROJ_NAME-theme"
 	
 	echo "Do you want to configure a database? I'm assuming one already exists in mysql...(y/n)"
 	read DB_Y_N

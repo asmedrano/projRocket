@@ -39,5 +39,6 @@ and grabs Wordpress from github. Your theme is ```ln -s``` into the wordpress th
 You will also be asked if you want to configure your DB which will set up wp-config.php.
 
 
-##Disclaimer
-I work on an Ubuntu machine. Therefore, I've only tested this on an Ubuntu machine. I'm not sure what OSX does with things like ```readlink``` or ```awk``` or ```sed``` so... if you happen to try it, let me know what happens!
+##Tested on:
+Ubuntu 12.04
+MacOSX
