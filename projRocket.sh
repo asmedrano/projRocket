@@ -155,9 +155,9 @@ start_wp_project (){
 
 		# we are gonna use SED to edit config.sample that exists in wordpress/wp-config-sample.php
 		cp $DIR/$PROJ_NAME/wordpress/wp-config-sample.php $DIR/$PROJ_NAME/wordpress/wp-config.php
-		sed -i 's/username_here/'${DB_USER}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
-		sed -i 's/database_name_here/'${DB_NAME}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
-		sed -i 's/password_here/'${DB_PASS}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i -e 's/username_here/'${DB_USER}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i -e 's/database_name_here/'${DB_NAME}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
+		sed -i -e 's/password_here/'${DB_PASS}'/g' $DIR/$PROJ_NAME/wordpress/wp-config.php
 	fi
 
 
