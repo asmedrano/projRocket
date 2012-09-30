@@ -3,9 +3,6 @@
 ##Installation
 ```git clone``` or download a zip
 
-Stick it in your ```~/bin``` directory or make a .bashrc ```alias```
-
-
 ##Usage:
 ```
 ./projRocket --help
