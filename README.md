@@ -2,7 +2,9 @@
 
 ##Installation
 ```git clone``` or download a zip
-
+Create an alias in ``` ~/.bashrc ```  
+Ex:  
+```alias projRocket='bash /path/to/projRocket/projRocket.sh'```
 ##Usage:
 ```
 ./projRocket --help
