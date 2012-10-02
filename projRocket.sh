@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPTPATH=`perl -e 'use Cwd "abs_path";print abs_path(shift)'`
+SCRIPTPATH=$(cd "$(dirname "$0")"; pwd)
 DIR="." # the directory that holds this project
 PROJ_TYPE=""
 PROJ_NAME="UNTITLED"
