@@ -24,11 +24,35 @@ Use: ```-t staticsite```
 What happens:
 Creates a static site based on html5Boilerplate
 
+
+###Django Project
+
+Use: ```-t django```
+What happens:
+Creates a new virtualenv environment (ENV), pip installs Django, calls startproject with your project name
+```
+testdjango/
+├── ENV
+├── manage.py
+└── testdjango
+    ├── __init__.py
+	├── settings.py
+	    ├── urls.py
+		└── wsgi.py
+```
+Install extra packages into your ENV with -e followed by a COMMA DELIMITED string. Currently only PyPi packages work. 
+Example:
+```
+-e south,psycopg2
+```
+
 ###Python Module 
 Use: ```-t pymodule```
 What happens:
 Creates a skeleton python module that adheres to 
 http://guide.python-distribute.org/creation.html
+
+
 
 ###Wordpress
 Use: ```-t wordpress```

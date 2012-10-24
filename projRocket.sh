@@ -4,7 +4,7 @@ SCRIPTPATH=$(cd "$(dirname "$0")"; pwd)
 DIR="." # the directory that holds this project
 PROJ_TYPE=""
 PROJ_NAME="UNTITLED"
-
+EXTRAS=""
 
 if [ "$1" == "--help" ];
 then
@@ -41,6 +41,24 @@ then
 	
 	echo 
 
+	#--------Django-------------------------------
+	echo -e " ----------\n Django Project\n ----------"
+	echo " Use: -t django"
+	echo " What happens:"
+	echo -e " Creates a new virtualenv environment (ENV), pip installs Django, calls startproject with your project name"
+	echo -e " testdjango/
+	├── ENV
+	├── manage.py
+	└── testdjango
+	    ├── __init__.py
+	        ├── settings.py
+		    ├── urls.py
+		        └── wsgi.py"
+	
+	echo -e "Install extra packages into your ENV with -e followed by a COMMA DELIMITED string. Currently only PyPi packages work. "
+	echo -e "Example:"
+	echo -e "-e south,psycopg2"
+
 	#--------WORDPRESS-------------------------------
 	echo -e " ----------\n Wordpress\n ----------"
 	echo " Use: -t wordpress"
@@ -55,7 +73,7 @@ fi
 
 
 
-while getopts ":t:n:d:" opt; do
+while getopts ":t:n:d:e:" opt; do
   case $opt in
     t)
       #echo "-t was triggered, Parameter: $OPTARG" >&2
@@ -67,6 +85,10 @@ while getopts ":t:n:d:" opt; do
       ;;
     d)
       DIR=$OPTARG
+      ;;
+    e)
+
+      EXTRAS="$OPTARG"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -183,6 +205,39 @@ start_pymodule (){
 
 }
 
+start_django (){
+
+	echo "Starting Django Project, codename: $PROJ_NAME"
+	
+	if [ ! -d "$DIR/$PROJ_NAME" ];
+		then
+			mkdir "$DIR/$PROJ_NAME"
+	fi
+	
+	# everyone uses virtualenv!
+	virtualenv $DIR/$PROJ_NAME/ENV
+	source $DIR/$PROJ_NAME/ENV/bin/activate && pip install django
+	
+	# start project
+
+	DJANGO_PROJ_NAME=` echo $PROJ_NAME | awk '{print tolower($0)}'` # lower caseproject name
+	source $DIR/$PROJ_NAME/ENV/bin/activate && django-admin.py startproject $DJANGO_PROJ_NAME $DIR/$PROJ_NAME
+	
+	#this supports the EXTRAS -e arg, it will pip install everything you pass to it.
+
+	OIFS=$IFS
+	IFS=','
+	extra_installs=$EXTRAS
+	for x in $extra_installs
+	do
+		source $DIR/$PROJ_NAME/ENV/bin/activate && pip install $x
+	done
+
+        IFS=$OIFS
+
+	echo "Done!"
+	
+}
 
 #--------------------------- Options are parsed, do the buisness
 
@@ -226,3 +281,8 @@ if [ "$PROJ_TYPE" == "pymodule" ];
 	
 fi
 
+if [ "$PROJ_TYPE" == "django" ];
+	then
+	start_django
+	
+fi
